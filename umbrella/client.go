@@ -10,13 +10,28 @@ import (
 const HostURL string = "https://api.umbrella.com"
 
 type Client struct {
-	HostURL string
+	HostURL    string
 	HTTPClient *http.Client
-	Token string
+	Token      string
+	Auth       AuthStruct
 }
 
+// AuthStruct -
+type AuthStruct struct {
+	Apikey string
+	Apisecret string
+}
+
+// AuthResponse -
+type AuthResponse struct {
+	Tokentype string `json:"token_type"`
+	Token    string  `json:"access_token"`
+	Expiresin int    `json:"expires_in"`
+}
+
+
 // NewClient -
-func NewClient(host, token *string) (*Client, error) {
+func NewClient(host, apikey, apisecret *string) (*Client, error) {
 	c := Client{
 		HTTPClient: &http.Client{Timeout: 10 * time.Second},
 		HostURL: HostURL,
@@ -26,7 +41,22 @@ func NewClient(host, token *string) (*Client, error) {
 		c.HostURL = *host
 	}
 
-	c.Token = *token
+	// If username or password not provided, return empty client
+    if apikey == nil || apisecret == nil {
+		return &c, nil
+    }
+
+	c.Auth = AuthStruct{
+		Apikey: *apikey,
+		Apisecret: *apisecret,
+	}
+	
+	ar, err := c.GetToken()
+	if err != nil {
+		return nil, err
+	}
+
+	c.Token = ar.Token
 
 	return &c, nil
 }
@@ -36,9 +66,8 @@ func (c *Client) doRequest(req *http.Request, authToken *string) ([]byte, error)
 
 	if authToken != nil {
 		token = *authToken
+		req.Header.Set("Authorization", "Bearer " + token)
 	}
-
-	req.Header.Set("Authorization", "Bearer " + token)
 
 	res, err := c.HTTPClient.Do(req)
 	if err != nil {

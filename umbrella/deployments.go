@@ -1,11 +1,11 @@
 package umbrella
 
 import (
+	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
-	"bytes"
-	"errors"
 )
 
 // GetlistOfNetworks
@@ -23,7 +23,7 @@ func (c *Client) GetListNetworks(authToken *string) (*[]Network, error) {
 	}
 
 	var networks []Network
-	
+
 	err = json.Unmarshal(body, &networks)
 	if err != nil {
 		return nil, err
@@ -38,7 +38,7 @@ func (c *Client) CreateNetwork(NetworkItem Network, authToken *string) (*Network
 	if err != nil {
 		return nil, err
 	}
-	
+
 	//rb[2] = byte(unicode.ToLower(rune(rb[2])))
 
 	fmt.Println(string(rb))
@@ -56,7 +56,7 @@ func (c *Client) CreateNetwork(NetworkItem Network, authToken *string) (*Network
 	if err != nil {
 		return nil, err
 	}
-    fmt.Println(string(body))
+	fmt.Println(string(body))
 
 	network := Network{}
 	err = json.Unmarshal(body, &network)
@@ -73,7 +73,7 @@ func (c *Client) CreateInternalNetwork(NetworkItem Internalnetwork, authToken *s
 	if err != nil {
 		return nil, err
 	}
-	
+
 	//rb[2] = byte(unicode.ToLower(rune(rb[2])))
 
 	fmt.Println(string(rb))
@@ -91,7 +91,7 @@ func (c *Client) CreateInternalNetwork(NetworkItem Internalnetwork, authToken *s
 	if err != nil {
 		return nil, err
 	}
-    fmt.Println(string(body))
+	fmt.Println(string(body))
 
 	network := Internalnetwork{}
 	err = json.Unmarshal(body, &network)
@@ -120,7 +120,7 @@ func (c *Client) CreateSite(SiteItem Site, authToken *string) (*Site, error) {
 	if err != nil {
 		return nil, err
 	}
-    fmt.Println(string(body))
+	fmt.Println(string(body))
 
 	site := Site{}
 	err = json.Unmarshal(body, &site)
@@ -149,7 +149,6 @@ func (c *Client) DeleteSite(siteID string, authToken *string) error {
 
 	return nil
 }
-
 
 // GetSite - Returns a specifc Site
 func (c *Client) GetSite(siteID string, authToken *string) (*Site, error) {
