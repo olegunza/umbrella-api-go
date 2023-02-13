@@ -122,7 +122,7 @@ func (c *Client) CreateSite(SiteItem Site, authToken *string) (*Site, error) {
 	}
 	fmt.Println(string(body))
 
-	site := Site{}
+	site := Site{}	
 	err = json.Unmarshal(body, &site)
 	if err != nil {
 		return nil, err
@@ -153,6 +153,34 @@ func (c *Client) DeleteSite(siteID string, authToken *string) error {
 // GetSite - Returns a specifc Site
 func (c *Client) GetSite(siteID string, authToken *string) (*Site, error) {
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/deployments/v2/sites/%s", c.HostURL, siteID), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := c.doRequest(req, authToken)
+	if err != nil {
+		return nil, err
+	}
+
+	site := Site{}
+	err = json.Unmarshal(body, &site)
+	if err != nil {
+		return nil, err
+	}
+
+	return &site, nil
+}
+
+// UpdateSite - Updates a site
+func (c *Client) UpdateSite(siteID string, SiteItem Site, authToken *string) (*Site, error) {
+	rb, err := json.Marshal(SiteItem)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PUT", fmt.Sprintf("%s/deployments/v2/sites/%s", c.HostURL, siteID), bytes.NewBuffer(rb))
+	req.Header.Set("Content-Type", "application/json; charset=UTF-8")
+
 	if err != nil {
 		return nil, err
 	}
