@@ -18,23 +18,22 @@ type Client struct {
 
 // AuthStruct -
 type AuthStruct struct {
-	Apikey string
+	Apikey    string
 	Apisecret string
 }
 
 // AuthResponse -
 type AuthResponse struct {
 	Tokentype string `json:"token_type"`
-	Token    string  `json:"access_token"`
+	Token     string `json:"access_token"`
 	Expiresin int    `json:"expires_in"`
 }
-
 
 // NewClient -
 func NewClient(host, apikey, apisecret *string) (*Client, error) {
 	c := Client{
 		HTTPClient: &http.Client{Timeout: 10 * time.Second},
-		HostURL: HostURL,
+		HostURL:    HostURL,
 	}
 
 	if host != nil {
@@ -42,15 +41,15 @@ func NewClient(host, apikey, apisecret *string) (*Client, error) {
 	}
 
 	// If username or password not provided, return empty client
-    if apikey == nil || apisecret == nil {
+	if apikey == nil || apisecret == nil {
 		return &c, nil
-    }
+	}
 
 	c.Auth = AuthStruct{
-		Apikey: *apikey,
+		Apikey:    *apikey,
 		Apisecret: *apisecret,
 	}
-	
+
 	ar, err := c.GetToken()
 	if err != nil {
 		return nil, err
@@ -66,7 +65,7 @@ func (c *Client) doRequest(req *http.Request, authToken *string) ([]byte, error)
 
 	if authToken != nil {
 		token = *authToken
-		req.Header.Set("Authorization", "Bearer " + token)
+		req.Header.Set("Authorization", "Bearer "+token)
 	}
 
 	res, err := c.HTTPClient.Do(req)
@@ -80,7 +79,7 @@ func (c *Client) doRequest(req *http.Request, authToken *string) ([]byte, error)
 	if err != nil {
 		return nil, err
 	}
-    if res.StatusCode == 204 {
+	if res.StatusCode == 204 {
 		return []byte("204"), nil
 	}
 	if res.StatusCode != http.StatusOK {

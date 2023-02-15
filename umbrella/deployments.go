@@ -122,7 +122,7 @@ func (c *Client) CreateSite(SiteItem Site, authToken *string) (*Site, error) {
 	}
 	fmt.Println(string(body))
 
-	site := Site{}	
+	site := Site{}
 	err = json.Unmarshal(body, &site)
 	if err != nil {
 		return nil, err
