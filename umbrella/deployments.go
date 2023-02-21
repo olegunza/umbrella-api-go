@@ -132,8 +132,8 @@ func (c *Client) CreateSite(SiteItem Site, authToken *string) (*Site, error) {
 }
 
 // DeleteSite - Deletes a site
-func (c *Client) DeleteSite(siteID string, authToken *string) error {
-	req, err := http.NewRequest("DELETE", fmt.Sprintf("%s/deployments/v2/sites/%s", c.HostURL, siteID), nil)
+func (c *Client) DeleteSite(siteID int64, authToken *string) error {
+	req, err := http.NewRequest("DELETE", fmt.Sprintf("%s/deployments/v2/sites/%d", c.HostURL, siteID), nil)
 	if err != nil {
 		return err
 	}
@@ -151,8 +151,8 @@ func (c *Client) DeleteSite(siteID string, authToken *string) error {
 }
 
 // GetSite - Returns a specifc Site
-func (c *Client) GetSite(siteID string, authToken *string) (*Site, error) {
-	req, err := http.NewRequest("GET", fmt.Sprintf("%s/deployments/v2/sites/%s", c.HostURL, siteID), nil)
+func (c *Client) GetSite(siteID int64, authToken *string) (*Site, error) {
+	req, err := http.NewRequest("GET", fmt.Sprintf("%s/deployments/v2/sites/%d", c.HostURL, siteID), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -193,13 +193,13 @@ func (c *Client) GetSites(authToken *string) ([]Site, error) {
 }
 
 // UpdateSite - Updates a site
-func (c *Client) UpdateSite(siteID string, SiteItem Site, authToken *string) (*Site, error) {
+func (c *Client) UpdateSite(siteID int64, SiteItem Site, authToken *string) (*Site, error) {
 	rb, err := json.Marshal(SiteItem)
 	if err != nil {
 		return nil, err
 	}
 
-	req, err := http.NewRequest("PUT", fmt.Sprintf("%s/deployments/v2/sites/%s", c.HostURL, siteID), bytes.NewBuffer(rb))
+	req, err := http.NewRequest("PUT", fmt.Sprintf("%s/deployments/v2/sites/%d", c.HostURL, siteID), bytes.NewBuffer(rb))
 	req.Header.Set("Content-Type", "application/json; charset=UTF-8")
 
 	if err != nil {
