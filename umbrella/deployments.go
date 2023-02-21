@@ -171,6 +171,27 @@ func (c *Client) GetSite(siteID string, authToken *string) (*Site, error) {
 	return &site, nil
 }
 
+// GetSites - Returns list of sites
+func (c *Client) GetSites(authToken *string) (*[]Site, error) {
+	req, err := http.NewRequest("GET", fmt.Sprintf("%s/deployments/v2/sites", c.HostURL), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := c.doRequest(req, authToken)
+	if err != nil {
+		return nil, err
+	}
+
+	sites := []Site{}
+	err = json.Unmarshal(body, &sites)
+	if err != nil {
+		return nil, err
+	}
+
+	return &sites, nil
+}
+
 // UpdateSite - Updates a site
 func (c *Client) UpdateSite(siteID string, SiteItem Site, authToken *string) (*Site, error) {
 	rb, err := json.Marshal(SiteItem)
