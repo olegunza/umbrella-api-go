@@ -172,7 +172,7 @@ func (c *Client) GetSite(siteID string, authToken *string) (*Site, error) {
 }
 
 // GetSites - Returns list of sites
-func (c *Client) GetSites(authToken *string) (*[]Site, error) {
+func (c *Client) GetSites(authToken *string) ([]Site, error) {
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/deployments/v2/sites", c.HostURL), nil)
 	if err != nil {
 		return nil, err
@@ -189,7 +189,7 @@ func (c *Client) GetSites(authToken *string) (*[]Site, error) {
 		return nil, err
 	}
 
-	return &sites, nil
+	return sites, nil
 }
 
 // UpdateSite - Updates a site
