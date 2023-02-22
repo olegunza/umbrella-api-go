@@ -92,3 +92,38 @@ type Meta struct{}
 type Response struct {
 	Message string `json:"message,omitempty"`
 }
+
+type VA struct {
+	OriginId       int64      `json:"originId,omitempty"`
+	SiteId         int64      `json:"siteiId,omitempty"`
+	CreatedAt      string     `json:"createdAt,omitempty"`
+	Health         string     `json:"health,omitempty"`
+	ModifiedAt     string     `json:"modifiedAt,omitempty"`
+	Name           string     `json:"name"`
+	StateUpdatedAt string     `json:"stateUpdatedAt,omitempty"`
+	Type           string     `json:"type,omitempty"`
+	IsUpgradable   bool       `json:"isUpgradeble,omitempty"`
+	Settings       VASettings `json:"settings,omitempty"`
+	State          VAState    `json:"state,omitempty"`
+}
+
+type VASettings struct {
+	Uptime            int64  `json:"uptime,omitempty"`
+	ExternalIp        string `json:"externalIp,omitempty"`
+	HostType          string `json:"hostType,omitempty"`
+	LastSyncTime      string `json:"lastSyncTime,omitempty"`
+	UpgradeError      string `json:"upgradeError,omitempty"`
+	Version           string `json:"version,omitempty"`
+	IsDnscryptEnabled bool   `json:"isDnscryptEnabled,omitempty"`
+	Domains           []string
+	internalIPs       []string
+}
+
+type VAState struct {
+	ConnectedToConnector       string `json:"connectedToConnector,omitempty"`
+	HasLocalDomainConfigured   string `json:"hasLocalDomainConfigured,omitempty"`
+	QueryFailureRateAcceptable string `json:"queryFailureRateAcceptable,omitempty"`
+	ReceivedInternalDNSQueries string `json:"receivedInternalDNSQueries,omitempty"`
+	RedundantWithinSite        string `json:"redundantWithinSite,omitempty"`
+	Syncing                    string `json:"syncing,omitempty"`
+}
