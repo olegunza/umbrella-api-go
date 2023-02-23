@@ -108,15 +108,15 @@ type VA struct {
 }
 
 type VASettings struct {
-	Uptime            int64  `json:"uptime,omitempty"`
-	ExternalIp        string `json:"externalIp,omitempty"`
-	HostType          string `json:"hostType,omitempty"`
-	LastSyncTime      string `json:"lastSyncTime,omitempty"`
-	UpgradeError      string `json:"upgradeError,omitempty"`
-	Version           string `json:"version,omitempty"`
-	IsDnscryptEnabled bool   `json:"isDnscryptEnabled,omitempty"`
-	Domains           []string
-	internalIPs       []string
+	Uptime            int64    `json:"uptime,omitempty"`
+	ExternalIp        string   `json:"externalIp,omitempty"`
+	HostType          string   `json:"hostType,omitempty"`
+	LastSyncTime      string   `json:"lastSyncTime,omitempty"`
+	UpgradeError      string   `json:"upgradeError,omitempty"`
+	Version           string   `json:"version,omitempty"`
+	IsDnscryptEnabled bool     `json:"isDnscryptEnabled,omitempty"`
+	Domains           []string `json:"domains,omitempty"`
+	InternalIps       []string `json:"internalIPs,omitempty"`
 }
 
 type VAState struct {
