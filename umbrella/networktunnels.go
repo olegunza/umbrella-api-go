@@ -30,8 +30,31 @@ func (c *Client) GetTunnel(tunnelID string, authToken *string) (*NetworkTunnel, 
 }
 
 // CreateTunnel - Create new Tunnel
-func (c *Client) CreateTunnel(TunnelItem NetworkTunnelCreate, authToken *string) (*NetworkTunnel, error) {
-	rb, err := json.Marshal(TunnelItem)
+func (c *Client) CreateTunnel(TunnelItem NetworkTunnel, authToken *string) (*NetworkTunnel, error) {
+	TunnelItemC := NetworkTunnelCreate{
+		Id:           TunnelItem.Id,
+		Uri:          TunnelItem.Uri,
+		Name:         TunnelItem.Name,
+		SiteOriginId: TunnelItem.SiteOriginId,
+		DeviceType:   TunnelItem.Client.DeviceType,
+		Transport:    TunnelItem.Transport,
+		ServiceType:  TunnelItem.ServiceType,
+		NetworkCIDRs: TunnelItem.NetworkCIDRs,
+		Meta:         TunnelItem.Meta,
+		CreatedAt:    TunnelItem.CreatedAt,
+		ModifiedAt:   TunnelItem.ModifiedAt,
+		Authentication: TunnelAuth{
+			Type: TunnelItem.Client.Authentication.Type,
+			Parameters: TunnelAuthParams{
+				Id:         TunnelItem.Client.Authentication.Parameters.Id,
+				ModifiedAt: TunnelItem.Client.Authentication.Parameters.ModifiedAt,
+				IdPrefix:   TunnelItem.Client.Authentication.Parameters.IdPrefix,
+				Secret:     TunnelItem.Client.Authentication.Parameters.Secret,
+			},
+		},
+	}
+
+	rb, err := json.Marshal(TunnelItemC)
 	if err != nil {
 		return nil, err
 	}

@@ -41,33 +41,33 @@ type NetworkTunnel struct {
 	Id           int64        `json:"id"`
 	Uri          string       `json:"uri,omitempty"`
 	Name         string       `json:"name,omitempty"`
-	Siteoriginid int64        `json:"siteOriginId,omitempty"`
+	SiteOriginId int64        `json:"siteOriginId,omitempty"`
 	Client       TunnelClient `json:"client,omitempty"`
 	Transport    TunnelTrans  `json:"transport,omitempty"`
-	Servicetype  string       `json:"serviceType,omitempty"`
+	ServiceType  string       `json:"serviceType,omitempty"`
 	NetworkCIDRs []string     `json:"networkCIDRs,omitempty"`
 	Meta         Meta         `json:"meta,omitempty"`
-	Createdat    string       `json:"cretedAt,omitempty"`
-	Modifiedat   string       `json:"modifiedAt,omitempty"`
+	CreatedAt    string       `json:"cretedAt,omitempty"`
+	ModifiedAt   string       `json:"modifiedAt,omitempty"`
 }
 
 type NetworkTunnelCreate struct {
 	Id             int64       `json:"id"`
 	Uri            string      `json:"uri,omitempty"`
 	Name           string      `json:"name,omitempty"`
-	Siteoriginid   int64       `json:"siteOriginId,omitempty"`
-	Devicetype     string      `json:"devicetype,omitempty"`
+	SiteOriginId   int64       `json:"siteOriginId,omitempty"`
+	DeviceType     string      `json:"devicetype,omitempty"`
 	Transport      TunnelTrans `json:"transport,omitempty"`
-	Servicetype    string      `json:"serviceType,omitempty"`
+	ServiceType    string      `json:"serviceType,omitempty"`
 	NetworkCIDRs   []string    `json:"networkCIDRs,omitempty"`
 	Meta           Meta        `json:"meta,omitempty"`
-	Createdat      string      `json:"cretedAt,omitempty"`
-	Modifiedat     string      `json:"modifiedAt,omitempty"`
+	CreatedAt      string      `json:"cretedAt,omitempty"`
+	ModifiedAt     string      `json:"modifiedAt,omitempty"`
 	Authentication TunnelAuth  `json:"authentication,omitempty"`
 }
 
 type TunnelClient struct {
-	Devicetype     string     `json:"deviceType,omitempty"`
+	DeviceType     string     `json:"deviceType,omitempty"`
 	Authentication TunnelAuth `json:"authentication,omitempty"`
 }
 
@@ -78,8 +78,8 @@ type TunnelAuth struct {
 
 type TunnelAuthParams struct {
 	Id         string `json:"id,omitempty"`
-	Modifiedat string `json:"modifiedAt,omitempty"`
-	Idprefix   string `json:"idPrefix,omitempty"`
+	ModifiedAt string `json:"modifiedAt,omitempty"`
+	IdPrefix   string `json:"idPrefix,omitempty"`
 	Secret     string `json:"secret,omitempty"`
 }
 
