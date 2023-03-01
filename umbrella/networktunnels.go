@@ -82,8 +82,8 @@ func (c *Client) CreateTunnel(TunnelItem NetworkTunnel, authToken *string) (*Net
 }
 
 // DeleteTunnel - Deletes a tunnel
-func (c *Client) DeleteTunnel(tunnelID string, authToken *string) error {
-	req, err := http.NewRequest("DELETE", fmt.Sprintf("%s/deployments/v2/tunnels/%s", c.HostURL, tunnelID), nil)
+func (c *Client) DeleteTunnel(tunnelID int64, authToken *string) error {
+	req, err := http.NewRequest("DELETE", fmt.Sprintf("%s/deployments/v2/tunnels/%d", c.HostURL, tunnelID), nil)
 	if err != nil {
 		return err
 	}
@@ -104,13 +104,13 @@ func (c *Client) DeleteTunnel(tunnelID string, authToken *string) error {
 }
 
 // UpdateTunnel - Updates a tunnel
-func (c *Client) UpdateTunnel(tunnelID string, TunnelItem NetworkTunnel, authToken *string) (*NetworkTunnel, error) {
+func (c *Client) UpdateTunnel(tunnelID int64, TunnelItem NetworkTunnel, authToken *string) (*NetworkTunnel, error) {
 	rb, err := json.Marshal(TunnelItem)
 	if err != nil {
 		return nil, err
 	}
 
-	req, err := http.NewRequest("PUT", fmt.Sprintf("%s/deployments/v2/tunnels/%s", c.HostURL, tunnelID), bytes.NewBuffer(rb))
+	req, err := http.NewRequest("PUT", fmt.Sprintf("%s/deployments/v2/tunnels/%d", c.HostURL, tunnelID), bytes.NewBuffer(rb))
 	req.Header.Set("Content-Type", "application/json; charset=UTF-8")
 
 	if err != nil {
