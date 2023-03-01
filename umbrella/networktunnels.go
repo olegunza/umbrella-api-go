@@ -9,8 +9,8 @@ import (
 )
 
 // GetTunnel - Returns a specifc tunnel
-func (c *Client) GetTunnel(tunnelID string, authToken *string) (*NetworkTunnel, error) {
-	req, err := http.NewRequest("GET", fmt.Sprintf("%s/deployments/v2/tunnels/%s", c.HostURL, tunnelID), nil)
+func (c *Client) GetTunnel(tunnelID int64, authToken *string) (*NetworkTunnel, error) {
+	req, err := http.NewRequest("GET", fmt.Sprintf("%s/deployments/v2/tunnels/%d", c.HostURL, tunnelID), nil)
 	if err != nil {
 		return nil, err
 	}
