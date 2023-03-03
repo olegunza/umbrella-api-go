@@ -47,7 +47,7 @@ type NetworkTunnel struct {
 	ServiceType  string       `json:"serviceType,omitempty"`
 	NetworkCIDRs []string     `json:"networkCIDRs,omitempty"`
 	Meta         Meta         `json:"meta,omitempty"`
-	CreatedAt    string       `json:"cretedAt,omitempty"`
+	CreatedAt    string       `json:"createdAt,omitempty"`
 	ModifiedAt   string       `json:"modifiedAt,omitempty"`
 }
 
