@@ -43,12 +43,11 @@ func (c *Client) CreateTunnel(TunnelItem NetworkTunnel, authToken *string) (*Net
 		Meta:         TunnelItem.Meta,
 		CreatedAt:    TunnelItem.CreatedAt,
 		ModifiedAt:   TunnelItem.ModifiedAt,
-		Authentication: TunnelAuth{
+		Authentication: TunnelAuthCreate{
 			Type: TunnelItem.Client.Authentication.Type,
-			Parameters: TunnelAuthParams{
-				Id:         TunnelItem.Client.Authentication.Parameters.Id,
+			Parameters: TunnelAuthParamsCreate{
 				ModifiedAt: TunnelItem.Client.Authentication.Parameters.ModifiedAt,
-				IdPrefix:   TunnelItem.Client.Authentication.Parameters.IdPrefix,
+				IdPrefix:   TunnelItem.Client.Authentication.Parameters.Id,
 				Secret:     TunnelItem.Client.Authentication.Parameters.Secret,
 			},
 		},

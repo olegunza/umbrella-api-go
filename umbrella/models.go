@@ -52,18 +52,18 @@ type NetworkTunnel struct {
 }
 
 type NetworkTunnelCreate struct {
-	Id             int64       `json:"id"`
-	Uri            string      `json:"uri,omitempty"`
-	Name           string      `json:"name,omitempty"`
-	SiteOriginId   int64       `json:"siteOriginId,omitempty"`
-	DeviceType     string      `json:"devicetype,omitempty"`
-	Transport      TunnelTrans `json:"transport,omitempty"`
-	ServiceType    string      `json:"serviceType,omitempty"`
-	NetworkCIDRs   []string    `json:"networkCIDRs,omitempty"`
-	Meta           Meta        `json:"meta,omitempty"`
-	CreatedAt      string      `json:"createdAt,omitempty"`
-	ModifiedAt     string      `json:"modifiedAt,omitempty"`
-	Authentication TunnelAuth  `json:"authentication,omitempty"`
+	Id             int64            `json:"id"`
+	Uri            string           `json:"uri,omitempty"`
+	Name           string           `json:"name,omitempty"`
+	SiteOriginId   int64            `json:"siteOriginId,omitempty"`
+	DeviceType     string           `json:"devicetype,omitempty"`
+	Transport      TunnelTrans      `json:"transport,omitempty"`
+	ServiceType    string           `json:"serviceType,omitempty"`
+	NetworkCIDRs   []string         `json:"networkCIDRs,omitempty"`
+	Meta           Meta             `json:"meta,omitempty"`
+	CreatedAt      string           `json:"createdAt,omitempty"`
+	ModifiedAt     string           `json:"modifiedAt,omitempty"`
+	Authentication TunnelAuthCreate `json:"authentication,omitempty"`
 }
 
 type TunnelClient struct {
@@ -76,8 +76,17 @@ type TunnelAuth struct {
 	Parameters TunnelAuthParams `json:"parameters,omitempty"`
 }
 
+type TunnelAuthCreate struct {
+	Type       string                 `json:"type,omitempty"`
+	Parameters TunnelAuthParamsCreate `json:"parameters,omitempty"`
+}
 type TunnelAuthParams struct {
 	Id         string `json:"id,omitempty"`
+	ModifiedAt string `json:"modifiedAt,omitempty"`
+	Secret     string `json:"secret,omitempty"`
+}
+
+type TunnelAuthParamsCreate struct {
 	ModifiedAt string `json:"modifiedAt,omitempty"`
 	IdPrefix   string `json:"idPrefix,omitempty"`
 	Secret     string `json:"secret,omitempty"`
