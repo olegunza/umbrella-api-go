@@ -104,7 +104,7 @@ type Response struct {
 
 type VA struct {
 	OriginId       int64      `json:"originId,omitempty"`
-	SiteId         int64      `json:"siteiId,omitempty"`
+	SiteId         int64      `json:"siteId,omitempty"`
 	CreatedAt      string     `json:"createdAt,omitempty"`
 	Health         string     `json:"health,omitempty"`
 	ModifiedAt     string     `json:"modifiedAt,omitempty"`
