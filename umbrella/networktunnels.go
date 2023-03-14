@@ -129,3 +129,24 @@ func (c *Client) UpdateTunnel(tunnelID int64, TunnelItem NetworkTunnel, authToke
 
 	return &tunnel, nil
 }
+
+// GetDCs - Returns list of IPSec-enabled data centers
+func (c *Client) GetDCs(authToken *string) (*DCList, error) {
+	req, err := http.NewRequest("GET", fmt.Sprintf("%s/deployments/v2/datacenters", c.HostURL), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := c.doRequest(req, authToken)
+	if err != nil {
+		return nil, err
+	}
+
+	dclist := DCList{}
+	err = json.Unmarshal(body, &dclist)
+	if err != nil {
+		return nil, err
+	}
+
+	return &dclist, nil
+}

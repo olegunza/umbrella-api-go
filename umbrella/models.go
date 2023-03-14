@@ -136,3 +136,20 @@ type VAState struct {
 	RedundantWithinSite        string `json:"redundantWithinSite,omitempty"`
 	Syncing                    string `json:"syncing,omitempty"`
 }
+
+type DCList struct {
+	Continents []Continent `json:"continents,omitempty"`
+}
+type City struct {
+	Latitude  string `json:"latitude,omitempty"`
+	Longitude string `json:"longitude,omitempty"`
+	Name      string `json:"name,omitempty"`
+	Dc        string `json:"dc,omitempty"`
+	Range     string `json:"range,omitempty"`
+	Fqdn      string `json:"fqdn,omitempty"`
+}
+
+type Continent struct {
+	Cities []City `json:"cities,omitempty"`
+	Name   string `json:"string,omitempty"`
+}
