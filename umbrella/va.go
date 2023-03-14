@@ -2,10 +2,11 @@ package umbrella
 
 import (
 	"bytes"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"net/http"
+
+	"github.com/clarketm/json"
 )
 
 // GetVA - Returns a specific VA
