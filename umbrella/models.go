@@ -108,7 +108,7 @@ type VA struct {
 	CreatedAt      string     `json:"createdAt,omitempty"`
 	Health         string     `json:"health,omitempty"`
 	ModifiedAt     string     `json:"modifiedAt,omitempty"`
-	Name           string     `json:"name"`
+	Name           string     `json:"name,omitempty"`
 	StateUpdatedAt string     `json:"stateUpdatedAt,omitempty"`
 	Type           string     `json:"type,omitempty"`
 	IsUpgradable   bool       `json:"isUpgradeble,omitempty"`
