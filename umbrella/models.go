@@ -151,5 +151,5 @@ type City struct {
 
 type Continent struct {
 	Cities []City `json:"cities,omitempty"`
-	Name   string `json:"string,omitempty"`
+	Name   string `json:"name,omitempty"`
 }
